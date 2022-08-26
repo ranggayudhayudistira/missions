@@ -14,7 +14,6 @@ a:hover {
 }
 
 .navbar {
-  align-items: center;
   overflow: hidden;
   background-color: #FFF;
   position: sticky;
@@ -56,7 +55,6 @@ a:hover {
   margin-bottom: 10px;
 }
 .post-container {
-  align-items: center;
   gap: 10px;
 }
 
@@ -143,6 +141,7 @@ a:hover {
 
 .btn {
   padding: 10px 20px;
+  cursor: pointer;
 }
 
 .shadow {
@@ -193,6 +192,14 @@ input:focus {
   border-top: 1px solid #F4F5F7;
 }
 
+.center {
+  align-items: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 800px) {
   .content {
     width: 80%;
@@ -206,11 +213,7 @@ input:focus {
   .post-container img{
     display: inline-block;
   }
-  .post-footer {
-    align-items: center;
-  }
   .post-author {
-    align-items: center;
     gap: 5px;
   }
   .footer {
@@ -222,6 +225,7 @@ input:focus {
   .btn-submit {
     width: 40%;
   }
+  
 }
 
 .bg-red {

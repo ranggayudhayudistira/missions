@@ -8,6 +8,6 @@ TO DO:
 1. ~~Layouting CSS~~
 2. ~~Responsive test~~
 3. ~~Add lazy load (lozad.js)~~
-4. Randomizing post
-5. Create "Load More" post
+4. ~~Randomizing post~~
+5. ~~Create "Load More" post~~
 6. Deploy
