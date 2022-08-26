@@ -23,7 +23,7 @@ body {
   display: block;
   color: #949EB2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -33,6 +33,7 @@ body {
 }
 
 .content {
+  max-width: 1080px;
   box-sizing: border-box;
   padding-right: 30px;
   padding-left: 30px;
@@ -106,10 +107,37 @@ body {
   border-radius: 50%;
 }
 
+.footer-container {
+  margin-left: -43px;
+  margin-right: -43px;
+}
+
+.footer {
+  display: block;
+  border-radius: 5px;
+  padding: 30px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer > h4 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.footer > p {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 .btn {
   padding: 10px 20px;
-  font-weight: 800;
-  display: inline-block;
+}
+
+.shadow {
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 1px 0 #363C4A4D,
@@ -121,6 +149,33 @@ body {
   color: inherit;
 }
 
+.btn-form {
+  height: auto;
+  font-size: 18px;
+  width: 100%
+}
+
+.btn-submit {
+  height: auto;
+  font-size: 16px;
+  width: 100%
+}
+
+input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+}
+
+input:focus {
+  outline: cyan;
+}
+
+.inline {
+  display: inline-block;
+}
+
 @media only screen and (min-width: 800px) {
   .content {
     width: 80%;
@@ -128,7 +183,7 @@ body {
   .flex {
     display: flex;
   }
-  .flex-empty {
+  .flex-fill {
     flex: 1 1 auto;
   }
   .post-container img{
@@ -140,6 +195,15 @@ body {
   .post-author {
     align-items: center;
     gap: 5px;
+  }
+  .footer {
+    width: 50%;
+  }
+  .btn-form {
+    width: 60%;
+  }
+  .btn-submit {
+    width: 40%;
   }
 }
 
@@ -153,7 +217,7 @@ body {
   background-color: yellow;
 }
 .bg-green {
-  background-color: green;
+  background-color: limegreen;
 }
 .bg-blue {
   background-color: blue;
@@ -197,4 +261,20 @@ body {
 }
 .text-gray {
   color: #778298;
+}
+.text-white {
+  color: #FFF;
+}
+
+.font-light {
+  font-weight: 100;
+}
+.font-normal {
+  font-weight: 300;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 900;
 }
