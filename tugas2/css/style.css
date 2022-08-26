@@ -1,0 +1,165 @@
+body {
+  display: block;
+  font-family: "Source Sans Pro";
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: #FFF;
+  position: sticky;
+  top: 0;
+  padding: 10px 10px 10px 10px;
+  width: 95%;
+  margin: auto;
+}
+
+.navbar-logo {
+  width: 200px;
+}
+
+.navbar-item a {
+  float: left;
+  display: block;
+  color: #949EB2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar-item a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  box-sizing: border-box;
+  padding-right: 30px;
+  padding-left: 30px;
+  margin: auto;
+  width: 100%;
+}
+
+@media only screen and (min-width: 800px) {
+  .content {
+    width: 80%;
+  }
+}
+
+.post-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-thumbnail img {
+  display: inline-block;
+  object-fit: cover;
+  width: 128px;
+  height: 128px;
+}
+
+.post-thumbnail {
+  flex: none;
+}
+
+.post-detail {
+  flex: 1 1 auto;
+}
+
+.post-title {
+  font-family: 'Source Serif Pro';
+  font-size: 32px;
+}
+
+.post-title a {
+  color: #DE3F1C;
+  text-decoration: none;
+}
+
+.post-title a:hover {
+  text-decoration: underline;
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+}
+
+.post-button {
+  flex: none;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-author-name {
+  display: inline-block;
+  font-weight: 300;
+}
+
+.post-author-photo {
+  display: inline-block;
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.flex-empty {
+  flex: 1 1 auto;
+}
+
+.bg-red {
+  background-color: red;
+}
+.bg-orange {
+  background-color: orange;
+}
+.bg-yellow {
+  background-color: yellow;
+}
+.bg-green {
+  background-color: green;
+}
+.bg-blue {
+  background-color: blue;
+}
+.bg-pink {
+  background-color: pink;
+}
+.bg-purple {
+  background-color: purple;
+}
+
+.text-red {
+  color: red;
+}
+.text-orange {
+  color: orange;
+}
+.text-yellow {
+  color: yellow;
+}
+.text-green {
+  color: green;
+}
+.text-blue {
+  color: blue;
+}
+.text-pink {
+  color: pink;
+}
+.text-purple {
+  color: purple;
+}
+.text-black {
+  color: black;
+}
+.text-gray {
+  color: #778298;
+}
