@@ -10,4 +10,6 @@ TO DO:
 3. ~~Add lazy load (lozad.js)~~
 4. ~~Randomizing post~~
 5. ~~Create "Load More" post~~
-6. Deploy
+6. ~~Deploy~~
+
+Live at https://db.greckminas.com/mission1_webdev/tugas2/

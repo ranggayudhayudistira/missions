@@ -150,7 +150,7 @@ function loadPost(count) {
         var string = `<div class="post-container center flex">
         <div class="post-thumbnail">
             <a href="#"> 
-                <img class="lazyload" data-src="`+ postThumbnail +`"/>
+                <img class="lazyload" width="128px" data-src="`+ postThumbnail +`"/>
             </a>
         </div>
         <div class="post-detail">
@@ -171,7 +171,7 @@ function loadPost(count) {
                 <div class="flex-fill"></div>
                 <div class="post-author center flex">
                     <h4 class="post-author-name text-gray">`+ authorName +`</h4>
-                    <img class="post-author-photo" src="`+ authorPhoto +`"/>
+                    <img class="post-author-photo" width="40px" src="`+ authorPhoto +`"/>
                 </div>
             </div>
         </div>
