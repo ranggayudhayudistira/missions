@@ -1,7 +1,7 @@
 mission1_webdev: tugas 2
 https://hackdesign.org/lessons
 
-NIM: 201524022
+NIM: 201524022<br>
 Nama: Rangga Yudha Yudistira
 
 TO DO:
