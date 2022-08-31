@@ -14,7 +14,8 @@ class Animate {
     proc = {
         start: 0,
         timeFraction: 0,
-        isReverse: false
+        isReverse: false,
+        deltaTime: 0
     }
 
     animateFunction = function animate(time) {
