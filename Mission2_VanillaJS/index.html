@@ -11,23 +11,54 @@
     <link href="Assets\css\style.css" rel="preload" as="style" onload="this.rel='stylesheet'"></link>
     <script src="Assets\js\script.js"></script>
     <style>
+        :root {
+            --sun-width: 25%;
+        }
         progress {
-          width: 5%;
+            width: 5%;
+        }
+
+        body {
+            position: relative;
+            min-height: 100%;
+            background-image: url('Assets/img/layer1_1_background.png');
+            background-size: auto 100%;
+            background-repeat: repeat-x;
+            height: 100vh;
+        }
+
+        #sun {
+            position: absolute;
+            width: var(--sun-width);
+            
+            max-width: 350px;
+            height: auto;
+            top: calc(100vh * 0.125);
+            left: calc(100vw * 0.5 - calc(var(--sun-width)/2));
+        }
+
+        @media (max-aspect-ratio: 4/3) or (max-height: 400px){
+            body {
+                background: #0000007F;
+            }
         }
     </style>
 </head>
-<body>
-    <progress id="elem"></progress>
+<body class="">
+    <div class="flex align-items-center">
+        <img id="sun" src="Assets/img/layer1_2_1sun.png"/>
+    </div>
+    <!-- <progress id="elem"></progress>
     <br/><br/><br/>
     <progress id="elemstop"></progress>
     <br/><br/><br/>
     <progress id="elempause"></progress>
     <br/><br/><br/>
-    <progress id="elemresume"></progress>
+    <progress id="elemresume"></progress> -->
 
-  <script>
+  <!-- <script>
     let _animate = new Animate(
-            duration=1000, 
+            duration=5000, 
             draw=function(progress) {
                 elem.style.width = progress * 100 + '%';
             },
@@ -48,7 +79,7 @@
     elemresume.onclick = function() {
         _animate.resume();
     };
-  </script>
+  </script> -->
 </body>
 <footer class="">
 </footer>

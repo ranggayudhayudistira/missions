@@ -15,10 +15,13 @@ class Animate {
         start: 0,
         timeFraction: 0,
         isReverse: false,
+        pauseTime: 0,
         deltaTime: 0
     }
 
     animateFunction = function animate(time) {
+        time = time - this.proc.deltaTime;
+
         this.proc.timeFraction = (time - this.proc.start) / this.duration;
         if (this.proc.timeFraction > 1) this.proc.timeFraction = 1;
   
@@ -26,10 +29,13 @@ class Animate {
         this.draw(progress);
   
         if (this.proc.timeFraction < 1 && this.isRun && !this.isPause) {
-            this.handle = requestAnimationFrame(animate);
+            this.handle = requestAnimationFrame(this.callback.call);
         }
     };
     animateLoopFunction = function animate(time) {
+        time -= this.proc.deltaTime;
+        //this.proc.start = this.proc.start + this.proc.deltaTime;
+        
         if (!this.proc.isReverse) {
             this.proc.timeFraction = (time - this.proc.start) / this.duration;
         }
@@ -37,14 +43,15 @@ class Animate {
           this.proc.timeFraction = ((this.proc.start+this.duration) - time) / this.duration;
         }
         if (this.proc.timeFraction > 1) {
+          console.log(this.proc.timeFraction);
           this.proc.timeFraction = 1;
           this.proc.isReverse = true;
-          this.proc.start = performance.now();
+          this.proc.start = performance.now() - this.proc.deltaTime;
         }
         if (this.proc.timeFraction < 0) {
           this.proc.timeFraction = 0;
           this.proc.isReverse = false;
-          this.proc.start = performance.now();
+          this.proc.start = performance.now() - this.proc.deltaTime;
         }
     
         let progress = this.timing(this.proc.timeFraction)
@@ -77,6 +84,8 @@ class Animate {
 
     start() {
         if(!this.isRun) {
+            this.proc.pauseTime = 0;
+            this.proc.deltaTime = 0;
             this.isRun = true;
             this.isPause = false;
             this.animating();
@@ -86,6 +95,8 @@ class Animate {
     resume() {
         if(this.isRun && this.isPause) {
             this.isPause = false;
+            this.proc.deltaTime += performance.now() - this.proc.pauseTime;
+            console.log(this.proc.pauseTime)
             this.requestAnimate();
         }
     }
@@ -104,12 +115,12 @@ class Animate {
     pause() {
         if(this.isRun && !this.isPause) {
             this.isPause = true;
+            this.proc.pauseTime = performance.now();
             if(this.handle) {
                 cancelAnimationFrame(this.handle);
             }
         }
     }
-
 
     // private
     requestAnimate() {
