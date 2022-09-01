@@ -1,6 +1,7 @@
 const AnimateType = {
     NORMAL: 0,
-    LOOP: 1
+    LOOP: 1,
+    LOOPREVERSE: 2
 };
 
 class Animate {
@@ -33,6 +34,22 @@ class Animate {
         }
     };
     animateLoopFunction = function animate(time) {
+        time = time - this.proc.deltaTime;
+
+        this.proc.timeFraction = (time - this.proc.start) / this.duration;
+        if (this.proc.timeFraction > 1) {
+            this.proc.timeFraction = 1;
+            this.proc.start = performance.now();
+        }
+  
+        let progress = this.timing(this.proc.timeFraction)
+        this.draw(progress);
+  
+        if (this.isRun && !this.isPause) {
+            this.handle = requestAnimationFrame(this.callback.call);
+        }
+    };
+    animateLoopReverseFunction = function animate(time) {
         time -= this.proc.deltaTime;
         //this.proc.start = this.proc.start + this.proc.deltaTime;
         
@@ -43,7 +60,6 @@ class Animate {
           this.proc.timeFraction = ((this.proc.start+this.duration) - time) / this.duration;
         }
         if (this.proc.timeFraction > 1) {
-          console.log(this.proc.timeFraction);
           this.proc.timeFraction = 1;
           this.proc.isReverse = true;
           this.proc.start = performance.now() - this.proc.deltaTime;
@@ -77,6 +93,9 @@ class Animate {
                 break;
             case AnimateType.LOOP:
                 this.callback.call = (this.animateLoopFunction).bind(this);
+                break;
+            case AnimateType.LOOPREVERSE:
+                this.callback.call = (this.animateLoopReverseFunction).bind(this);
                 break;
         }
         

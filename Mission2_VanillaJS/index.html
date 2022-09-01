@@ -18,16 +18,17 @@
             width: 5%;
         }
 
-        body {
+        /* body {
             position: relative;
             min-height: 100%;
             background-image: url('Assets/img/layer1_1_background.png');
             background-size: auto 100%;
             background-repeat: repeat-x;
             height: 100vh;
-        }
+            overflow: hidden;
+        } */
 
-        #sun {
+        /* #sun {
             position: absolute;
             width: var(--sun-width);
             
@@ -35,6 +36,82 @@
             height: auto;
             top: calc(100vh * 0.125);
             left: calc(100vw * 0.5 - calc(var(--sun-width)/2));
+        } */
+
+        /* #mountain-back {
+            position: absolute;
+            width: 100%;
+
+            height: auto;
+            
+            top: calc(100vh * 0.32);
+            left: 0;
+        } */
+
+        /* #mountain-mid {
+            position: absolute;
+            width: 100%;
+            
+            height: auto;
+            
+            top: calc(100vh * 0.2675);
+            left: 0;
+        } */
+
+        /* #mountain-front {
+            position: absolute;
+            width: 100%;
+            
+            height: auto;
+            
+            bottom: 0;
+            left: 0;
+        } */
+
+        /* #grass {
+            position: absolute;
+            width: 100%;
+            
+            height: auto;
+            
+            bottom: 0;
+            left: 0;
+        } */
+
+        /* .blur-1 {
+            filter: blur(1px);
+        }
+        .blur-2 {
+            filter: blur(2px);
+        }
+        .blur-3 {
+            filter: blur(3px);
+        }
+        .blur-4 {
+            filter: blur(4px);
+        }
+        .blur-5 {
+            filter: blur(5px);
+        } */
+
+        /* .slide-anim {
+            width: 100%;
+            height: auto;
+        } */
+        /* .slider.slide-anim{
+            left: calc(-100vw + 2px) !important;
+        } */
+        /* .slide {
+            animation: slide 100s infinite linear;
+            animation-name: slide;
+            animation-duration: 100s;
+            animation-iteration-count: infinite;
+            animation-direction: linear;
+        } */
+
+        @keyframes slide {
+            from {transform: translateX(  0%);}
+            to {transform: translateX(100%);}
         }
 
         @media (max-aspect-ratio: 4/3) or (max-height: 400px){
@@ -45,8 +122,24 @@
     </style>
 </head>
 <body class="">
-    <div class="flex align-items-center">
-        <img id="sun" src="Assets/img/layer1_2_1sun.png"/>
+    <div>
+        <img class="blur-3" id="sun" src="Assets/img/layer1_2_1sun.png"/>
+    </div>
+    <div>
+        <img class="slide slide-anim blur-3" id="mountain-back" src="Assets/img/layer2_1_bmountain.png"/>
+        <img class="slide slide-anim slider blur-3" id="mountain-back" src="Assets/img/layer2_1_bmountain.png"/>
+    </div>
+    <div>
+        <img class="slide slide-anim blur-1" id="mountain-mid" src="Assets/img/layer3_1_mmountain.png"/>
+        <img class="slide slide-anim slider blur-1" id="mountain-mid" src="Assets/img/layer3_1_mmountain.png"/>
+    </div>
+    <div>
+        <img class="slide slide-anim" id="mountain-front" src="Assets/img/layer4_1_fmountain.png"/>
+        <img class="slide slide-anim slider" id="mountain-front" src="Assets/img/layer4_1_fmountain.png"/>
+    </div>
+    <div>
+        <img class="slide slide-anim blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
+        <img class="slide slide-anim slider blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
     </div>
     <!-- <progress id="elem"></progress>
     <br/><br/><br/>
@@ -56,30 +149,203 @@
     <br/><br/><br/>
     <progress id="elemresume"></progress> -->
 
-  <!-- <script>
-    let _animate = new Animate(
-            duration=5000, 
+  <script>
+    let grassLoop = new Animate(
+            duration=15000, 
             draw=function(progress) {
-                elem.style.width = progress * 100 + '%';
+                document.querySelectorAll('#grass').forEach(
+                    function(el) {
+                        el.style.cssText = el.getAttribute('init');
+                        var left = el.style['left'];
+                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
+                    }
+                );
             },
             timing=function(timeFraction) {
                 return timeFraction;
             },
-            type=AnimateType.LOOP);
-            
-    elem.onclick = function() {
-        _animate.start();
-    };
-    elemstop.onclick = function() {
-        _animate.stop();
-    };
-    elempause.onclick = function() {
-        _animate.pause();
-    };
-    elemresume.onclick = function() {
-        _animate.resume();
-    };
-  </script> -->
+            type=AnimateType.LOOP
+        );
+    let fmountainLoop = new Animate(
+            duration=25000, 
+            draw=function(progress) {
+                document.querySelectorAll('#mountain-front').forEach(
+                    function(el) {
+                        el.style.cssText = el.getAttribute('init');
+                        var left = el.style['left'];
+                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
+                    }
+                );
+            },
+            timing=function(timeFraction) {
+                return timeFraction;
+            },
+            type=AnimateType.LOOP
+        );
+    let mmountainLoop = new Animate(
+            duration=35000, 
+            draw=function(progress) {
+                document.querySelectorAll('#mountain-mid').forEach(
+                    function(el) {
+                        el.style.cssText = el.getAttribute('init');
+                        var left = el.style['left'];
+                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
+                    }
+                );
+            },
+            timing=function(timeFraction) {
+                return timeFraction;
+            },
+            type=AnimateType.LOOP
+        );
+    let bmountainLoop = new Animate(
+            duration=50000, 
+            draw=function(progress) {
+                document.querySelectorAll('#mountain-back').forEach(
+                    function(el) {
+                        el.style.cssText = el.getAttribute('init');
+                        var left = el.style['left'];
+                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
+                    }
+                );
+            },
+            timing=function(timeFraction) {
+                return timeFraction;
+            },
+            type=AnimateType.LOOP
+        );
+    // init inline css
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("Window Loaded!");
+        var el;
+        el = document.querySelector('body')
+        el.style['position'] = "relative";
+        el.style['min-height'] = "100%";
+        el.style['background-image'] = "url('Assets/img/layer1_1_background.png')";
+        el.style['background-size'] = "auto 100%";
+        el.style['background-repeat'] = "repeat-x";
+        el.style['height'] = "100vh";
+        el.style['overflow'] = "hidden";
+        el.setAttribute("init", el.style.cssText);
+
+        document.querySelectorAll('#sun').forEach(
+            function(el) {
+                el.style['position'] = "absolute";
+            el.style['width'] = "var(--sun-width)";
+            el.style['max-width'] = "350px";
+            el.style['height'] = "auto";
+            el.style['top'] = "calc(100vh * 0.125)";
+            el.style['left'] = "calc(100vw * 0.5 - calc(var(--sun-width)/2))";
+            el.setAttribute("init", el.style.cssText);
+            }
+        );
+        
+
+        document.querySelectorAll('#mountain-back').forEach(
+            function(el) {
+                el.style['position'] = "absolute";
+                el.style['width'] = "100%";
+                el.style['height'] = "auto";
+                el.style['top'] = "calc(100vh * 0.32)";
+                el.style['left'] = "0";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+
+        document.querySelectorAll('#mountain-mid').forEach(
+            function(el) {
+                el.style['position'] = "absolute";
+                el.style['width'] = "100%";
+                el.style['height'] = "auto";
+                el.style['top'] = "calc(100vh * 0.2675)";
+                el.style['left'] = "0";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+
+        document.querySelectorAll('#mountain-front').forEach(
+            function(el) {
+                el.style['position'] = "absolute";
+                el.style['width'] = "100%";
+                el.style['height'] = "auto";
+                el.style['bottom'] = "0";
+                el.style['left'] = "0";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+
+        document.querySelectorAll('#grass').forEach(
+            function(el) {
+                el.style['position'] = "absolute";
+                el.style['width'] = "100%";
+                el.style['height'] = "auto";
+                el.style['bottom'] = "0";
+                el.style['left'] = "0";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+
+        document.querySelectorAll('[class*=blur-]').forEach(
+            function(el) {
+                var px = el.className.substring(el.className.indexOf('blur-') + 5);
+                el.style['filter'] = "blur("+ px +"px)";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+
+        document.querySelectorAll('.slide-anim').forEach(
+            function(el) {
+                el.style['width'] = "100%";
+                el.style['height'] = "auto";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+        // document.querySelectorAll('.slide').forEach(
+        //     function(el) {
+        //         el.style['animation-name'] = "slide";
+        //         el.style['animation-duration'] = "100s";
+        //         el.style['animation-iteration-count'] = "infinite";
+        //         el.style['animation-direction'] = "linear";
+        //     }
+        // );
+
+        // !important class
+        document.querySelectorAll('.slider.slide-anim').forEach(
+            function(el) {
+                el.style['left'] = "calc(-100vw + 2px)";
+                el.setAttribute("init", el.style.cssText);
+            }
+        );
+    });
+
+    document.querySelector('#grass').addEventListener('click', function() {
+        grassLoop.start();
+        bmountainLoop.start();
+        mmountainLoop.start();
+        fmountainLoop.start();
+
+        // document.querySelectorAll('#grass').forEach(
+        //     function(el) {
+        //         el.style['animation-duration'] = '15s';
+        //     }
+        // );
+        // document.querySelectorAll('#mountain-front').forEach(
+        //     function(el) {
+        //         el.style['animation-duration'] = '25s';
+        //     }
+        // );
+        // document.querySelectorAll('#mountain-mid').forEach(
+        //     function(el) {
+        //         el.style['animation-duration'] = '35s';
+        //     }
+        // );
+        // document.querySelectorAll('#mountain-back').forEach(
+        //     function(el) {
+        //         el.style['animation-duration'] = '50s';
+        //     }
+        // );
+    });
+  </script>
 </body>
 <footer class="">
 </footer>
