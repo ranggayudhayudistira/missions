@@ -12,6 +12,7 @@ class Animate {
     duration = 0;
     draw;
     timing;
+    
     proc = {
         start: 0,
         timeFraction: 0,
@@ -28,9 +29,11 @@ class Animate {
   
         let progress = this.timing(this.proc.timeFraction)
         this.draw(progress);
-  
+
         if (this.proc.timeFraction < 1 && this.isRun && !this.isPause) {
             this.handle = requestAnimationFrame(this.callback.call);
+        } else if (this.callback.end != null && this.proc.timeFraction >= 1) {
+            this.callback.end.start();
         }
     };
     animateLoopFunction = function animate(time) {
@@ -39,7 +42,7 @@ class Animate {
         this.proc.timeFraction = (time - this.proc.start) / this.duration;
         if (this.proc.timeFraction > 1) {
             this.proc.timeFraction = 1;
-            this.proc.start = performance.now();
+            this.proc.start = performance.now() - this.proc.deltaTime;
         }
   
         let progress = this.timing(this.proc.timeFraction)
@@ -79,10 +82,11 @@ class Animate {
     };
     
     callback = {
-        call: null
+        call: null,
+        end: null
     }
     
-    constructor(duration, draw, timing, type) {
+    constructor(duration, draw, timing, type, end = null) {
         this.duration = duration;
         this.draw = draw;
         this.timing = timing;
@@ -90,6 +94,7 @@ class Animate {
         switch(this.type) {
             case AnimateType.NORMAL:
                 this.callback.call = (this.animateFunction).bind(this);
+                this.callback.end = end;
                 break;
             case AnimateType.LOOP:
                 this.callback.call = (this.animateLoopFunction).bind(this);
@@ -115,7 +120,6 @@ class Animate {
         if(this.isRun && this.isPause) {
             this.isPause = false;
             this.proc.deltaTime += performance.now() - this.proc.pauseTime;
-            console.log(this.proc.pauseTime)
             this.requestAnimate();
         }
     }
