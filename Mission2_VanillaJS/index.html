@@ -13,7 +13,7 @@
     <style>
         :root {
             --sun-width: 25%;
-            --sun-margin: 5%;
+            --sun-margin: 50px;
             --cloud-height: 15%;
         }
         img {
@@ -29,32 +29,52 @@
             left: 0px;
             width: 100vw;
             height: 100vh;
-            /* background: radial-gradient(circle at center, red 0, blue, green 100%); */
             background-color: #f7f7ae3f;
         }
-        .sunlight-back {
-            position: absolute;
-            width: calc(var(--sun-width) + var(--sun-margin));
-            aspect-ratio: 1/1;
-            height: auto;
-            top: calc((100vh * 0.125) - (var(--sun-margin)));
-            left: calc((100vw * 0.5 - calc(var(--sun-width)/2)) - calc(var(--sun-margin)/2));
-            background: radial-gradient(circle at center, yellow 50%, #FFFF0000 70%, #FFFF0000 100%);
-        }
 
-        @keyframes slide {
-            from {transform: translateX(  0%);}
-            to {transform: translateX(100%);}
-        }
-
-        @media (max-aspect-ratio: 4/3) or (max-height: 400px){
+        @media (max-aspect-ratio: 9/6) or (max-height: 400px){
             body {
-                background: #0000007F;
+                display: none;
             }
+            html {
+                background: #000000FF;
+            }
+        }
+
+        #overlay{
+            position:absolute;
+            /* z-index:100; */
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            background:rgba(181,119,67,255);
+            transition: 1s 0.4s;
+        }
+        #progress{
+            height:1px;
+            background:rgba(250,246,166,255);
+            position:absolute;
+            width:0;
+            top:50%;
+        }
+        #progstat{
+            font-size:0.7em;
+            letter-spacing: 3px;
+            position:absolute;
+            top:50%;
+            margin-top:-40px;
+            width:100%;
+            text-align:center;
+            color:rgba(250,246,166,255);
         }
     </style>
 </head>
 <body class="">
+    <div id="overlay">
+        <div id="progstat"></div>
+        <div id="progress"></div>
+    </div>
     <div>
         <div class="sunlight-back"></div>
         <img class="blur-1" id="sun" src="Assets/img/layer1_2_1sun.png"/>
@@ -90,13 +110,6 @@
         <img class="slide slide-anim blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
         <img class="slide slide-anim slider blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
     </div>
-    <!-- <progress id="elem"></progress>
-    <br/><br/><br/>
-    <progress id="elemstop"></progress>
-    <br/><br/><br/>
-    <progress id="elempause"></progress>
-    <br/><br/><br/>
-    <progress id="elemresume"></progress> -->
 
   <script>
     function rand(min, max) {
@@ -246,6 +259,22 @@
             type=AnimateType.NORMAL,
             end=bmountainLoop
         );
+    let sunIn = new Animate(
+            duration=2000, 
+            draw=function(progress) {
+                document.querySelectorAll('#sun, .sunlight-back').forEach(
+                    function(el) {
+                        el.style.cssText = el.getAttribute('init');
+                        var top = el.style['top'];
+                        el.style['top'] = "calc(100vh + " + top + " - " + progress * 100 + "vh)";
+                    }
+                );
+            },
+            timing=function(timeFraction) {
+                return 1 - back(1.2, 1 - timeFraction);
+            },
+            type=AnimateType.NORMAL
+        );
     
     function cloudMaker(n, durationIn, leftIn, durationAnimation, leftAnimation, durationOut, leftOut) {
         // var n = 2;
@@ -320,9 +349,15 @@
         var _leftOut = _leftAnimation + randInteger(1, 2); //vw
         setTimeout(cloudMaker, randInteger(2500, 10000) + durationIn + durationAnimation + durationOut, n, _durationIn, _leftIn, _durationAnimation, _leftAnimation, _durationOut, _leftOut);
     }
+
+    document.querySelectorAll('img').forEach(
+            function(el) {
+                el.setAttribute('draggable', false);
+            }
+        );
         
     // init inline css
-    document.addEventListener('DOMContentLoaded', function() {
+    function initCss() {
         console.log("Window Loaded!");
         var el;
         el = document.querySelector('body')
@@ -343,6 +378,19 @@
                 el.style['height'] = "auto";
                 el.style['top'] = "calc(100vh * 0.125)";
                 el.style['left'] = "calc(100vw * 0.5 - calc(var(--sun-width)/2))";
+            el.setAttribute("init", el.style.cssText);
+            }
+        );
+
+        document.querySelectorAll('.sunlight-back').forEach(
+            function(el) {
+                el.style['position'] = "absolute";
+                el.style['width'] = "calc(var(--sun-width) + var(--sun-margin))";
+                el.style['aspect-ratio'] = "1/1";
+                el.style['height'] = "auto";
+                el.style['top'] = "calc((100vh * 0.125) - (var(--sun-margin)/2))";
+                el.style['left'] = "calc((100vw * 0.5 - calc(var(--sun-width)/2)) - calc(var(--sun-margin)/2))";
+                el.style['background'] = "radial-gradient(circle at center, yellow 50%, #FFFF0000 70%, #FFFF0000 100%)";
             el.setAttribute("init", el.style.cssText);
             }
         );
@@ -433,15 +481,6 @@
                 el.setAttribute("init", el.style.cssText);
             }
         );
-        // document.querySelectorAll('.slide').forEach(
-        //     function(el) {
-        //         el.style['animation-name'] = "slide";
-        //         el.style['animation-duration'] = "100s";
-        //         el.style['animation-iteration-count'] = "infinite";
-        //         el.style['animation-direction'] = "linear";
-        //     }
-        // );
-
         // !important class
         document.querySelectorAll('.slider.slide-anim').forEach(
             function(el) {
@@ -450,13 +489,21 @@
             }
         );
 
-        // make clouds transparent
+        // first condition before going in
         document.querySelectorAll('[id*=cloud-]').forEach(
             function(el) {
                 el.style['filter'] += " opacity(0%)";
             }
         );
-
+        document.querySelectorAll('#sun, #mountain-back, #mountain-mid, #mountain-front, #grass').forEach(
+            function(el) {
+                el.style['top'] = "100vh";
+            }
+        );
+    };
+    
+    // init animation queue
+    function initAnimation() {
         // animation in
         fmountainIn.start();
         mmountainIn.start();
@@ -471,8 +518,7 @@
             var _leftOut = _leftAnimation + randInteger(1, 2); //vw
             setTimeout(cloudMaker, randInteger(1000, 10000), n, _durationIn, _leftIn, _durationAnimation, _leftAnimation, _durationOut, _leftOut);
         }
-    });
-    
+    }
     let isInDialog = false;
     document.addEventListener('click', function() {
         if(!isInDialog) {
@@ -516,11 +562,45 @@
         //     }
         // );
     });
-    document.querySelectorAll('img').forEach(
-            function(el) {
-                el.setAttribute('draggable', false);
+
+    (function(){
+        function id(v){return document.getElementById(v); }
+        function loadPage() {
+            initCss();
+            var ovrl = id("overlay"),
+                prog = id("progress"),
+                stat = id("progstat"),
+                img = document.images,
+                c = 0;
+                tot = img.length;
+
+            function imgLoaded(){
+                c += 1;
+                var perc = ((100/tot*c) << 0) +"%";
+                prog.style.width = perc;
+                stat.innerHTML = "Loading "+ perc;
+                if(c===tot) return doneLoading();
             }
-        );
+            function doneLoading(){
+                sunIn.start();
+                setTimeout(function(){ 
+                    ovrl.style.opacity = 0;
+                    setTimeout(function() {
+                        initAnimation();
+                        ovrl.style.display = "none";
+                    }, 1200);
+                    
+                }, 2000);
+            }
+            for(var i=0; i<tot; i++) {
+                var tImg     = new Image();
+                tImg.onload  = imgLoaded;
+                tImg.onerror = imgLoaded;
+                tImg.src     = img[i].src;
+            }    
+        }
+        document.addEventListener('DOMContentLoaded', loadPage, false);
+        }());
   </script>
 </body>
 <footer class="">
