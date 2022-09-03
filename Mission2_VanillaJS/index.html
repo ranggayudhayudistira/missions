@@ -6,605 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission2 - VanillaJS</title>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap' rel="preload" as="style" onload="this.rel='stylesheet'" type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap' rel="preload" as="style" onload="this.rel='stylesheet'" type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Baloo+2:400,800&display=swap' rel="preload" as="style" onload="this.rel='stylesheet'" type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="Assets\css\style.css" rel="preload" as="style" onload="this.rel='stylesheet'"></link>
-    <script src="Assets\js\script.js"></script>
-    <style>
-        :root {
-            --sun-width: 25%;
-            --sun-margin: 50px;
-            --cloud-height: 15%;
-        }
-        img {
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -o-user-select: none;
-            user-select: none;
-        }
-        .sunlight {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 100vw;
-            height: 100vh;
-            background-color: #f7f7ae3f;
-        }
-
-        @media (max-aspect-ratio: 9/6) or (max-height: 400px){
-            body {
-                display: none;
-            }
-            html {
-                background: #000000FF;
-            }
-        }
-
-        #overlay{
-            position:absolute;
-            /* z-index:100; */
-            top:0;
-            left:0;
-            bottom:0;
-            right:0;
-            background:rgba(181,119,67,255);
-            transition: 1s 0.4s;
-        }
-        #progress{
-            height:1px;
-            background:rgba(250,246,166,255);
-            position:absolute;
-            width:0;
-            top:50%;
-        }
-        #progstat{
-            font-size:0.7em;
-            letter-spacing: 3px;
-            position:absolute;
-            top:50%;
-            margin-top:-40px;
-            width:100%;
-            text-align:center;
-            color:rgba(250,246,166,255);
-        }
-    </style>
+    
 </head>
 <body class="">
-    <div id="overlay">
-        <div id="progstat"></div>
-        <div id="progress"></div>
+    <div class="portrait-content">
+        <div class="portrait-phone"></div>
+        <div class="portrait-message">
+            Please rotate your device!
+        </div>
     </div>
-    <div>
-        <div class="sunlight-back"></div>
-        <img class="blur-1" id="sun" src="Assets/img/layer1_2_1sun.png"/>
+    <div class="content">
+        <div id="overlay">
+            <div id="progstat"></div>
+            <div id="progress"></div>
+        </div>
+        <div>
+            <div class="sunlight-back"></div>
+            <img class="blur-1" id="sun" src="Assets/img/layer1_2_1sun.png"/>
+        </div>
+        <div>
+            <img class="blur-1" id="cloud-1" src="Assets/img/layer1_2_2cloud1.png"/>
+            <img class="blur-1" id="cloud-2" src="Assets/img/layer1_2_3cloud2.png"/>
+            <img class="blur-1" id="cloud-3" src="Assets/img/layer1_2_4cloud3.png"/>
+            <img class="blur-1" id="cloud-4" src="Assets/img/layer1_2_5cloud4.png"/>
+            <img class="blur-1" id="cloud-5" src="Assets/img/layer1_2_6cloud5.png"/>
+            <img class="blur-1" id="cloud-6" src="Assets/img/layer1_2_7cloud6.png"/>
+            <img class="blur-1" id="cloud-7" src="Assets/img/layer1_2_8cloud7.png"/>
+            <img class="blur-1" id="cloud-8" src="Assets/img/layer1_2_9cloud8.png"/>
+            <img class="blur-1" id="cloud-9" src="Assets/img/layer1_2_10cloud9.png"/>
+            <img class="blur-1" id="cloud-10" src="Assets/img/layer1_2_11cloud10.png"/>
+            <img class="blur-1" id="cloud-11" src="Assets/img/layer1_2_12cloud11.png"/>
+            <img class="blur-1" id="cloud-12" src="Assets/img/layer1_2_13cloud12.png"/>
+        </div>
+        <div class="sunlight"></div>
+        <div>
+            <img class="slide slide-anim blur-3" id="mountain-back" src="Assets/img/layer2_1_bmountain.png"/>
+            <img class="slide slide-anim slider blur-3" id="mountain-back" src="Assets/img/layer2_1_bmountain.png"/>
+        </div>
+        <div>
+            <img class="slide slide-anim blur-1" id="mountain-mid" src="Assets/img/layer3_1_mmountain.png"/>
+            <img class="slide slide-anim slider blur-1" id="mountain-mid" src="Assets/img/layer3_1_mmountain.png"/>
+        </div>
+        <div>
+            <img class="slide slide-anim" id="mountain-front" src="Assets/img/layer4_1_fmountain.png"/>
+            <img class="slide slide-anim slider" id="mountain-front" src="Assets/img/layer4_1_fmountain.png"/>
+        </div>
+        <div>
+            <img class="slide slide-anim blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
+            <img class="slide slide-anim slider blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
+        </div>
+        <div class="chat-container">
+            <div id="chat-1" style="display: none;">
+                <img class="chat-image" src="Assets/img/character.png">
+                <div class="chat-text" text="Halo, perkenalkan nama saya Rangga."></div>
+            </div>
+        </div>
     </div>
-    <div>
-        <img class="blur-1" id="cloud-1" src="Assets/img/layer1_2_2cloud1.png"/>
-        <img class="blur-1" id="cloud-2" src="Assets/img/layer1_2_3cloud2.png"/>
-        <img class="blur-1" id="cloud-3" src="Assets/img/layer1_2_4cloud3.png"/>
-        <img class="blur-1" id="cloud-4" src="Assets/img/layer1_2_5cloud4.png"/>
-        <img class="blur-1" id="cloud-5" src="Assets/img/layer1_2_6cloud5.png"/>
-        <img class="blur-1" id="cloud-6" src="Assets/img/layer1_2_7cloud6.png"/>
-        <img class="blur-1" id="cloud-7" src="Assets/img/layer1_2_8cloud7.png"/>
-        <img class="blur-1" id="cloud-8" src="Assets/img/layer1_2_9cloud8.png"/>
-        <img class="blur-1" id="cloud-9" src="Assets/img/layer1_2_10cloud9.png"/>
-        <img class="blur-1" id="cloud-10" src="Assets/img/layer1_2_11cloud10.png"/>
-        <img class="blur-1" id="cloud-11" src="Assets/img/layer1_2_12cloud11.png"/>
-        <img class="blur-1" id="cloud-12" src="Assets/img/layer1_2_13cloud12.png"/>
-    </div>
-    <div class="sunlight"></div>
-    <div>
-        <img class="slide slide-anim blur-3" id="mountain-back" src="Assets/img/layer2_1_bmountain.png"/>
-        <img class="slide slide-anim slider blur-3" id="mountain-back" src="Assets/img/layer2_1_bmountain.png"/>
-    </div>
-    <div>
-        <img class="slide slide-anim blur-1" id="mountain-mid" src="Assets/img/layer3_1_mmountain.png"/>
-        <img class="slide slide-anim slider blur-1" id="mountain-mid" src="Assets/img/layer3_1_mmountain.png"/>
-    </div>
-    <div>
-        <img class="slide slide-anim" id="mountain-front" src="Assets/img/layer4_1_fmountain.png"/>
-        <img class="slide slide-anim slider" id="mountain-front" src="Assets/img/layer4_1_fmountain.png"/>
-    </div>
-    <div>
-        <img class="slide slide-anim blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
-        <img class="slide slide-anim slider blur-5" id="grass" src="Assets/img/layer5_1_grass.png"/>
-    </div>
-
-  <script>
-    function rand(min, max) {
-        return (Math.random() * (max - min) ) + min;
-    };
-    function randInteger(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) ) + min;
-    }
-    // https://javascript.info/js-animation#back-bow-shooting
-    function back(x, timeFraction) {
-        return Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x)
-    };
-    // https://javascript.info/js-animation#elastic-animation
-    function elastic(x, timeFraction) {
-        return Math.pow(2, 10 * (timeFraction - 1)) * Math.cos(20 * Math.PI * x / 3 * timeFraction)
-    }
-
-    let grassLoop = new Animate(
-            duration=10000, 
-            draw=function(progress) {
-                document.querySelectorAll('#grass').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.LOOP
-        );
-    let fmountainLoop = new Animate(
-            duration=17500, 
-            draw=function(progress) {
-                document.querySelectorAll('#mountain-front').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.LOOP
-        );
-    let mmountainLoop = new Animate(
-            duration=32500, 
-            draw=function(progress) {
-                document.querySelectorAll('#mountain-mid').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.LOOP
-        );
-    let bmountainLoop = new Animate(
-            duration=50000, 
-            draw=function(progress) {
-                document.querySelectorAll('#mountain-back').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + progress * 100 + "vw)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.LOOP
-        );
-    let grassIn = new Animate(
-            duration=800, 
-            draw=function(progress) {
-                document.querySelectorAll('#grass').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var bottom = el.style['bottom'];
-                        el.style['bottom'] = "calc(-100vh + " + bottom + " + " + progress * 100 + "vh)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return 1 - back(0.22, 1 - timeFraction);
-            },
-            type=AnimateType.NORMAL,
-            end=grassLoop
-        );
-    let fmountainIn = new Animate(
-            duration=1000, 
-            draw=function(progress) {
-                document.querySelectorAll('#mountain-front').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var bottom = el.style['bottom'];
-                        el.style['bottom'] = "calc(-100vh + " + bottom + " + " + progress * 100 + "vh)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return 1 - back(0.15, 1 - timeFraction);
-            },
-            type=AnimateType.NORMAL,
-            end=fmountainLoop
-        );
-    let mmountainIn = new Animate(
-            duration=1250, 
-            draw=function(progress) {
-                document.querySelectorAll('#mountain-mid').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var bottom = el.style['bottom'];
-                        el.style['bottom'] = "calc(-100vh + " + bottom + " + " + progress * 100 + "vh)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return 1 - back(0.5, 1 - timeFraction);
-            },
-            type=AnimateType.NORMAL,
-            end=mmountainLoop,
-        );
-    let bmountainIn = new Animate(
-            duration=1750, 
-            draw=function(progress) {
-                document.querySelectorAll('#mountain-back').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var bottom = el.style['bottom'];
-                        el.style['bottom'] = "calc(-100vh + " + bottom + " + " + progress * 100 + "vh)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return 1 - back(1.2, 1 - timeFraction);
-            },
-            type=AnimateType.NORMAL,
-            end=bmountainLoop
-        );
-    let sunIn = new Animate(
-            duration=2000, 
-            draw=function(progress) {
-                document.querySelectorAll('#sun, .sunlight-back').forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var top = el.style['top'];
-                        el.style['top'] = "calc(100vh + " + top + " - " + progress * 100 + "vh)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return 1 - back(1.2, 1 - timeFraction);
-            },
-            type=AnimateType.NORMAL
-        );
     
-    function cloudMaker(n, durationIn, leftIn, durationAnimation, leftAnimation, durationOut, leftOut) {
-        // var n = 2;
-        // var durationIn = 2500;
-        // var leftIn = 10; //vw
-        // var durationAnimation = 2500;
-        // var leftAnimation = 10; //vw
-        // var durationOut = 2500;
-        // var leftOut = 10; //vw
-
-        let cloudsOut = new Animate(
-            duration=durationOut, 
-            draw=function(progress) {
-                document.querySelectorAll("#cloud-"+n).forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var filter = el.style['filter'];
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + leftIn + "vw" + " + " + leftAnimation + "vw" + " + " + progress * leftOut + "vw)";
-                        el.style['filter'] += "opacity("+ (100 - Math.floor(progress * 100)) +"%)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.NORMAL
-        );
-        let cloudsAnimation = new Animate(
-            duration=durationAnimation, 
-            draw=function(progress) {
-                document.querySelectorAll("#cloud-"+n).forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + leftIn + "vw" + " + " + progress * leftAnimation + "vw)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.NORMAL,
-            end=cloudsOut
-        );
-        let cloudsIn = new Animate(
-            duration=durationIn, 
-            draw=function(progress) {
-                document.querySelectorAll("#cloud-"+n).forEach(
-                    function(el) {
-                        el.style.cssText = el.getAttribute('init');
-                        var filter = el.style['filter'];
-                        var left = el.style['left'];
-                        el.style['left'] = "calc(" + left + " + " + progress * leftIn + "vw)";
-                        el.style['filter'] += "opacity("+ Math.floor(progress * 100) +"%)";
-                    }
-                );
-            },
-            timing=function(timeFraction) {
-                return timeFraction;
-            },
-            type=AnimateType.NORMAL,
-            end=cloudsAnimation
-        );
-        cloudsIn.start();
-
-        var _durationIn = randInteger(1500, 3000);
-        var _leftIn = randInteger(1, 8); //vw
-        var _durationAnimation = _durationIn;
-        var _leftAnimation = _leftIn + randInteger(1, 5); //vw
-        var _durationOut = _durationIn;
-        var _leftOut = _leftAnimation + randInteger(1, 2); //vw
-        setTimeout(cloudMaker, randInteger(2500, 10000) + durationIn + durationAnimation + durationOut, n, _durationIn, _leftIn, _durationAnimation, _leftAnimation, _durationOut, _leftOut);
-    }
-
-    document.querySelectorAll('img').forEach(
-            function(el) {
-                el.setAttribute('draggable', false);
-            }
-        );
-        
-    // init inline css
-    function initCss() {
-        console.log("Window Loaded!");
-        var el;
-        el = document.querySelector('body')
-        el.style['position'] = "relative";
-        el.style['min-height'] = "100%";
-        el.style['background-image'] = "url('Assets/img/layer1_1_background.png')";
-        el.style['background-size'] = "auto 100%";
-        el.style['background-repeat'] = "repeat-x";
-        el.style['height'] = "100vh";
-        el.style['overflow'] = "hidden";
-        el.setAttribute("init", el.style.cssText);
-
-        document.querySelectorAll('#sun').forEach(
-            function(el) {
-                el.style['position'] = "absolute";
-                el.style['width'] = "var(--sun-width)";
-                el.style['aspect-ratio'] = "1/1";
-                el.style['height'] = "auto";
-                el.style['top'] = "calc(100vh * 0.125)";
-                el.style['left'] = "calc(100vw * 0.5 - calc(var(--sun-width)/2))";
-            el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('.sunlight-back').forEach(
-            function(el) {
-                el.style['position'] = "absolute";
-                el.style['width'] = "calc(var(--sun-width) + var(--sun-margin))";
-                el.style['aspect-ratio'] = "1/1";
-                el.style['height'] = "auto";
-                el.style['top'] = "calc((100vh * 0.125) - (var(--sun-margin)/2))";
-                el.style['left'] = "calc((100vw * 0.5 - calc(var(--sun-width)/2)) - calc(var(--sun-margin)/2))";
-                el.style['background'] = "radial-gradient(circle at center, yellow 50%, #FFFF0000 70%, #FFFF0000 100%)";
-            el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('[id*=cloud-]').forEach(
-            function(el) {
-                var id = el.getAttribute('id');
-                var height = el.naturalHeight;
-                var width = el.naturalWidth;
-                
-                id = id.substring(id.indexOf('cloud-') + 6);
-                el.style['position'] = "absolute";
-                
-                el.style['height'] = "var(--cloud-height)";
-                el.style['width'] = "auto";
-                el.style['max-width'] = width + "px";
-                el.style['max-height'] = height + "px";
-                var top = rand(0, 0.4);
-                var left = Math.random();
-
-                el.style['top'] = "calc(100vh * "+ top +")";
-                el.style['left'] = "calc(100vw * "+ left +")";
-                if(id != 11 && id != 12) {
-                    // https://codepen.io/sosuke/pen/Pjoqqp
-                    el.style['filter'] += " invert(6%) sepia(49%) saturate(500%) hue-rotate(335deg) brightness(110%) contrast(101%) opacity(75%)";
-                }
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-        
-
-        document.querySelectorAll('#mountain-back').forEach(
-            function(el) {
-                el.style['position'] = "absolute";
-                el.style['width'] = "100%";
-                el.style['height'] = "auto";
-                el.style['bottom'] = "calc(100vh * 0.32)";
-                el.style['left'] = "0";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('#mountain-mid').forEach(
-            function(el) {
-                el.style['position'] = "absolute";
-                el.style['width'] = "100%";
-                el.style['height'] = "auto";
-                el.style['bottom'] = "calc(100vh * 0.2675)";
-                el.style['left'] = "0";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('#mountain-front').forEach(
-            function(el) {
-                el.style['position'] = "absolute";
-                el.style['width'] = "100%";
-                el.style['height'] = "auto";
-                el.style['bottom'] = "0";
-                el.style['left'] = "0";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('#grass').forEach(
-            function(el) {
-                el.style['position'] = "absolute";
-                el.style['width'] = "100%";
-                el.style['height'] = "auto";
-                el.style['bottom'] = "0";
-                el.style['left'] = "0";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('[class*=blur-]').forEach(
-            function(el) {
-                var px = el.className.substring(el.className.indexOf('blur-') + 5);
-                el.style['filter'] += " blur("+ px +"px)";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        document.querySelectorAll('.slide-anim').forEach(
-            function(el) {
-                el.style['width'] = "100%";
-                el.style['height'] = "auto";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-        // !important class
-        document.querySelectorAll('.slider.slide-anim').forEach(
-            function(el) {
-                el.style['left'] = "calc(-100vw + 2px)";
-                el.setAttribute("init", el.style.cssText);
-            }
-        );
-
-        // first condition before going in
-        document.querySelectorAll('[id*=cloud-]').forEach(
-            function(el) {
-                el.style['filter'] += " opacity(0%)";
-            }
-        );
-        document.querySelectorAll('#sun, #mountain-back, #mountain-mid, #mountain-front, #grass').forEach(
-            function(el) {
-                el.style['top'] = "100vh";
-            }
-        );
-    };
     
-    // init animation queue
-    function initAnimation() {
-        // animation in
-        fmountainIn.start();
-        mmountainIn.start();
-        bmountainIn.start();
-        grassIn.start();
-        for(var n = 1; n < 13; n++) {
-            var _durationIn = randInteger(1500, 3000);
-            var _leftIn = randInteger(1, 8); //vw
-            var _durationAnimation = _durationIn;
-            var _leftAnimation = _leftIn + randInteger(1, 5); //vw
-            var _durationOut = _durationIn;
-            var _leftOut = _leftAnimation + randInteger(1, 2); //vw
-            setTimeout(cloudMaker, randInteger(1000, 10000), n, _durationIn, _leftIn, _durationAnimation, _leftAnimation, _durationOut, _leftOut);
-        }
-    }
-    let isInDialog = false;
-    document.addEventListener('click', function() {
-        if(!isInDialog) {
-            grassLoop.pause();
-            bmountainLoop.pause();
-            mmountainLoop.pause();
-            fmountainLoop.pause();
-        } else {
-            grassLoop.resume();
-            bmountainLoop.resume();
-            mmountainLoop.resume();
-            fmountainLoop.resume();
-        }
-        
-        isInDialog ^= true;
-    });
-    document.querySelector('#grass').addEventListener('click', function() {
-        grassLoop.start();
-        bmountainLoop.start();
-        mmountainLoop.start();
-        fmountainLoop.start();
-
-        // document.querySelectorAll('#grass').forEach(
-        //     function(el) {
-        //         el.style['animation-duration'] = '15s';
-        //     }
-        // );
-        // document.querySelectorAll('#mountain-front').forEach(
-        //     function(el) {
-        //         el.style['animation-duration'] = '25s';
-        //     }
-        // );
-        // document.querySelectorAll('#mountain-mid').forEach(
-        //     function(el) {
-        //         el.style['animation-duration'] = '35s';
-        //     }
-        // );
-        // document.querySelectorAll('#mountain-back').forEach(
-        //     function(el) {
-        //         el.style['animation-duration'] = '50s';
-        //     }
-        // );
-    });
-
-    (function(){
-        function id(v){return document.getElementById(v); }
-        function loadPage() {
-            initCss();
-            var ovrl = id("overlay"),
-                prog = id("progress"),
-                stat = id("progstat"),
-                img = document.images,
-                c = 0;
-                tot = img.length;
-
-            function imgLoaded(){
-                c += 1;
-                var perc = ((100/tot*c) << 0) +"%";
-                prog.style.width = perc;
-                stat.innerHTML = "Loading "+ perc;
-                if(c===tot) return doneLoading();
-            }
-            function doneLoading(){
-                sunIn.start();
-                setTimeout(function(){ 
-                    ovrl.style.opacity = 0;
-                    setTimeout(function() {
-                        initAnimation();
-                        ovrl.style.display = "none";
-                    }, 1200);
-                    
-                }, 2000);
-            }
-            for(var i=0; i<tot; i++) {
-                var tImg     = new Image();
-                tImg.onload  = imgLoaded;
-                tImg.onerror = imgLoaded;
-                tImg.src     = img[i].src;
-            }    
-        }
-        document.addEventListener('DOMContentLoaded', loadPage, false);
-        }());
-  </script>
 </body>
-<footer class="">
-</footer>
-
-
+<script src="Assets\js\script.js"></script>
 </html>
