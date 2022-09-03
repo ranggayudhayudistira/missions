@@ -313,6 +313,8 @@ let bmountainIn = new Animate(
 let sunIn = new Animate(
         duration=2000, 
         draw=function(progress) {
+            el = document.querySelector("#overlay");
+            el.style.removeProperty('z-index');
             document.querySelectorAll('#sun, .sunlight-back').forEach(
                 function(el) {
                     el.style.cssText = el.getAttribute('init');
