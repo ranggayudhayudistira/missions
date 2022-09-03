@@ -321,13 +321,13 @@ let sunIn = new Animate(
                     var left = el.style['left'];
                     //el.style['top'] = "calc(100vh + " + top + " - " + progress * 100 + "vh)";
                     el.style['width'] = "calc("+ width +" * "+ progress +")";
-                    el.style['top'] = "calc("+ top +" + (calc("+ width +" * "+ (1-progress) +")/2)";
+                    el.style['top'] = "calc(" + "calc(100vh - calc(100vh *"+ progress +")) + calc("+ top +" + (calc("+ width +" * "+ (1-progress) +")/2)" + ")";
                     el.style['left'] = "calc("+ left +" + (calc("+ width +" * "+ (1-progress) +")/2)";
                 }
             );
         },
         timing=function(timeFraction) {
-            return 1 - elastic(1.5, 1 - timeFraction);
+            return 1 - back(1.5, 1 - timeFraction);
         },
         type=AnimateType.NORMAL
     );
