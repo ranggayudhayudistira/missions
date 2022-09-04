@@ -485,6 +485,8 @@ function cloudMaker(n, durationIn, leftIn, durationAnimation, leftAnimation, dur
                     var left = el.style['left'];
                     el.style['left'] = "calc(" + left + " + " + leftIn + "vw" + " + " + leftAnimation + "vw" + " + " + progress * leftOut + "vw)";
                     el.style['filter'] += "opacity("+ (100 - Math.floor(progress * 100)) +"%)";
+                    el.style['max-width'] = el.naturalWidth + "px";
+                    el.style['max-height'] = el.naturalHeight + "px";
                 }
             );
         },
@@ -501,6 +503,8 @@ function cloudMaker(n, durationIn, leftIn, durationAnimation, leftAnimation, dur
                     el.style.cssText = el.getAttribute('init');
                     var left = el.style['left'];
                     el.style['left'] = "calc(" + left + " + " + leftIn + "vw" + " + " + progress * leftAnimation + "vw)";
+                    el.style['max-width'] = el.naturalWidth + "px";
+                    el.style['max-height'] = el.naturalHeight + "px";
                 }
             );
         },
@@ -519,6 +523,8 @@ function cloudMaker(n, durationIn, leftIn, durationAnimation, leftAnimation, dur
                     var left = el.style['left'];
                     el.style['left'] = "calc(" + left + " + " + progress * leftIn + "vw)";
                     el.style['filter'] += "opacity("+ Math.floor(progress * 100) +"%)";
+                    el.style['max-width'] = el.naturalWidth + "px";
+                    el.style['max-height'] = el.naturalHeight + "px";
                 }
             );
         },
@@ -781,7 +787,6 @@ document.addEventListener('click', function() {
 (function(){
     function id(v){return document.getElementById(v); }
     function loadPage() {
-        initCss();
         var ovrl = id("overlay"),
             prog = id("progress"),
             stat = id("progstat"),
@@ -794,7 +799,10 @@ document.addEventListener('click', function() {
             var perc = ((100/tot*c) << 0) +"%";
             prog.style.width = perc;
             stat.innerHTML = "Loading "+ perc;
-            if(c===tot) return doneLoading();
+            if(c===tot) {
+                initCss();
+                return doneLoading();
+            }
         }
         function doneLoading(){
             sunIn.start();
@@ -812,7 +820,8 @@ document.addEventListener('click', function() {
             tImg.onload  = imgLoaded;
             tImg.onerror = imgLoaded;
             tImg.src     = img[i].src;
-        }    
+        }   
+        
     }
     document.addEventListener('DOMContentLoaded', loadPage, false);
     }());
