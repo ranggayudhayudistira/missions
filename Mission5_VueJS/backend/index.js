@@ -41,6 +41,11 @@ app.post('/insert', [
       check('nim', "NIM harus diisi!").exists(),
       check('fullname', "Nama lengkap harus diisi!").exists(),
       check('birthdate', "Tanggal lahir harus diisi!").exists(),
+      check('nim', "NIM hanya dapat berisi nomor!").isNumeric(),
+      check('nim', "NIM terlalu pendek!").isLength({ min: 8 }),
+      check('nim', "NIM terlalu panjang!").isLength({ max: 20 }),
+      check('fullname', "Nama Lengkap terlalu pendek!").isLength({ min: 2 }),
+      check('fullname', "Nama Lengkap terlalu panjang!").isLength({ max: 240 }),
       check('birthdate', "Tanggal lahir tidak sesuai!").isISO8601().toDate()
    ], 
    async function (req, res) {
@@ -106,8 +111,14 @@ app.delete('/user/:nim', async function (req, res) {
 
 // Edit one Data
 app.put('/user/:nim', [
+   check('nim', "NIM harus diisi!").exists(),
    check('fullname', "Nama lengkap harus diisi!").exists(),
    check('birthdate', "Tanggal lahir harus diisi!").exists(),
+   check('nim', "NIM hanya dapat berisi nomor!").isNumeric(),
+   check('nim', "NIM terlalu pendek!").isLength({ min: 8 }),
+   check('nim', "NIM terlalu panjang!").isLength({ max: 20 }),
+   check('fullname', "Nama Lengkap terlalu pendek!").isLength({ min: 2 }),
+   check('fullname', "Nama Lengkap terlalu panjang!").isLength({ max: 240 }),
    check('birthdate', "Tanggal lahir tidak sesuai!").isISO8601().toDate()
 ], 
 async function (req, res) {
