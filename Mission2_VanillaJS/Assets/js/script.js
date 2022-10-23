@@ -379,13 +379,17 @@ function doDialog1() {
         duration=1000, 
         draw=function(progress) {
             el = document.querySelector("#chat-"+n)
-            var elImage = el;//.querySelector(".chat-image");
+            var elImage = el.querySelector(".chat-image");
             var elText = el.querySelector(".chat-text");
-            elImage.style.cssText = elImage.getAttribute('init');
+            el.style.cssText = el.getAttribute('init');
+
+            elImage.style['max-width'] = elImage.naturalWidth;
+            elImage.style['max-height'] = elImage.naturalHeight;
+            elImage.setAttribute('init', elImage.style.cssText);
             
-            var imageBottom = elImage.style['bottom'];
+            var imageBottom = el.style['bottom'];
             
-            elImage.style['bottom'] = "calc(-100vh + " + imageBottom + " + " + progress * 100 + "vh)";
+            el.style['bottom'] = "calc(-100vh + " + imageBottom + " + " + progress * 100 + "vh)";
 
             elText.style['width'] = "0px";
             elText.style['padding-top'] = "0px";
